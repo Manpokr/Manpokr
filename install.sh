@@ -8,7 +8,7 @@ cd "$(
 )" || exit
 #====================================================
 #	System Request:Debian 9+/Ubuntu 18.04+/Centos 7+
-#	Author:	mrbhai
+#	Author:	manternet.xyz
 #	Dscription: V2ray ws+tls onekey Management
 #	Version: 1.0
 #	email:nowos2050@gmail.com
