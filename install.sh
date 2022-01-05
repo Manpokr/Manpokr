@@ -12,7 +12,7 @@ cd "$(
 #	Dscription: V2ray ws+tls onekey Management
 #	Version: 1.0
 #	email:manpokr7@gmail.com
-#	Official document: www.v2ray.com
+#
 #====================================================
 
 #fonts color
