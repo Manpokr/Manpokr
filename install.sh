@@ -11,7 +11,7 @@ cd "$(
 #	Author:	manternet.xyz
 #	Dscription: V2ray ws+tls onekey Management
 #	Version: 1.0
-#	email:nowos2050@gmail.com
+#	email:manpokr7@gmail.com
 #	Official document: www.v2ray.com
 #====================================================
 
@@ -317,7 +317,7 @@ v2ray_install() {
     fi
     mkdir -p /root/v2ray
     cd /root/v2ray || exit
-    wget -N --no-check-certificate https://raw.githubusercontent.com/MrChota/bhai2ray/${github_branch}/v2ray.sh
+    wget -N --no-check-certificate https://raw.githubusercontent.com/Manpokr/manpokr/${github_branch}/v2ray.sh
 
     if [[ -f v2ray.sh ]]; then
         rm -rf $v2ray_systemd_file
@@ -495,7 +495,7 @@ acme() {
 }
 v2ray_conf_add_tls() {
     cd /etc/v2ray || exit
-    wget --no-check-certificate https://raw.githubusercontent.com/MrChota/bhai2ray/${github_branch}/tls/config.json -O config.json
+    wget --no-check-certificate https://raw.githubusercontent.com/Manpokr/manpokr/${github_branch}/tls/config.json -O config.json
     modify_path
     modify_alterid
     modify_inbound_port
@@ -503,7 +503,7 @@ v2ray_conf_add_tls() {
 }
 v2ray_conf_add_h2() {
     cd /etc/v2ray || exit
-    wget --no-check-certificate https://raw.githubusercontent.com/MrChota/bhai2ray/${github_branch}/http2/config.json -O config.json
+    wget --no-check-certificate https://raw.githubusercontent.com/Manpokr/manpokr/${github_branch}/http2/config.json -O config.json
     modify_path
     modify_alterid
     modify_inbound_port
