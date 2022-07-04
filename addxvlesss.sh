@@ -64,12 +64,17 @@ vless://$uuid@$domain:$xtls?flow=xtls-rprx-direct&encryption=none&security=xtls&
 vless://$uuid@$domain:$xtls?flow=xtls-rprx-splice&encryption=none&security=xtls&sni=$BUG&type=tcp&headerType=none&host=$BUG#$user@IanVPN
 vless://$uuid@$domain:$xtls?encryption=none&security=xtls&sni=$BUG&type=ws&host=$BUG&path=/xrayws#$user@IanVPN
 trojan://$uuid@$domain:$xtls?sni=$BUG#$user@IanVPN
+
+vd="vless://$uuid@$dom:$port?security=xtls&encryption=none&headerType=none&type=tcp&flow=xtls-rprx-direct&sni=$sni#$user"
+vu="vless://$uuid@$dom:$port?security=xtls&encryption=none&headerType=none&type=tcp&flow=xtls-rprx-direct-udp443&sni=$sni#$user"
+vs="vless://$uuid@$dom:$port?security=xtls&encryption=none&headerType=none&type=tcp&flow=xtls-rprx-splice&sni=$sni#$user"
+vsu="vless://$uuid@$dom:$port?security=xtls&encryption=none&headerType=none&type=tcp&flow=xtls-rprx-splice-udp443&sni=$sni#$user"
+
 ${vmesslink1}
-EOF
+systemctl restart xray.service
 
 # // User Info
 echo ${base64Result} >"/etc/rare/config-url/${uuid}"
-systemctl restart xray.service
 sleep 2
 clear
 
