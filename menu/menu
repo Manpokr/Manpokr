@@ -1,0 +1,68 @@
+#!/bin/bash
+RED='\033[0;31m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'                                                                                                                                    BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+LIGHT='\033[0;37m'
+yl='\e[031;1m'
+bl='\e[36;1m'
+gl='\e[32;1m'
+
+clear
+CITY=$(curl -s ipinfo.io/city )
+MYIP=$(curl -sS ipv4.icanhazip.com)
+ISP=$(curl -s ipinfo.io/org | cut -d " " -f 2-10 )
+CITY=$(curl -s ipinfo.io/city )
+sleep 1
+
+echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\033[1;46m     🔰 SYSTEM MENU VPN 🔰       \e[m"
+echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e "   UPTIME  : $(neofetch | grep Uptime | cut -d " " -f 2-100)" | lolcat
+echo -e "   Isp Name: $ISP" | lolcat
+echo -e "   City    : $CITY" | lolcat
+echo -e "   DOMAIN  : $(cat /etc/xray/domain)" | lolcat
+echo -e "   IPVPS   : $MYIP" | lolcat
+
+echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e   "   \033[0;31m[1]\033[0;34m• >> \033[0;31mSSH & OpenVPN Menu"
+echo -e   "   \033[0;31m[2]\033[0;34m• >> \033[0;34mPanel Wireguard "
+echo -e   "   \033[0;31m[3]\033[0;34m• >> \033[0;36mPanel SSR & SS Account\033[0;33m"
+echo -e   "   \033[0;31m[4]\033[0;34m• >> \033[0;35mPanel TrojanGo"
+echo -e   "   \033[0;31m[5]\033[0;34m• >> \033[0;34mV2ray Core Menu"
+echo -e   "   \033[0;31m[6]\033[0;34m• >> \033[0;36mXray Core Menu\033[0;34m"
+echo -e   "   \033[0;31m[7]\033[0;34m• >> \033[0;34m System  Menu"
+echo -e ""
+echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+
+read -p "Select Menu Options [ 1 - 7 ] : " menu
+case $menu in
+1)
+clear
+menu-ssh
+;;
+2)
+clear
+menu-wg
+;;
+3)
+clear
+menu-ssr
+;;
+4)
+clear
+menu-xray
+;;
+5)
+clear
+menu-v2ray
+;;
+6)
+clear
+system-menu
+;;
+*)
