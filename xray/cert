@@ -1,0 +1,35 @@
+#!/bin/bash
+domain=$(cat /root/domain)
+apt install iptables iptables-persistent -y
+apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y
+apt install socat cron bash-completion ntpdate -y
+ntpdate pool.ntp.org
+apt -y install chrony
+timedatectl set-ntp true
+systemctl enable chronyd && systemctl restart chronyd
+systemctl enable chrony && systemctl restart chrony
+timedatectl set-timezone Asia/Kuala_Lumpur
+chronyc sourcestats -v
+chronyc tracking -v
+date
+
+mkdir /etc/xray/tls/
+mkdir -p /etc/trojan/
+touch /etc/trojan/akun.conf
+# install SSL
+bash -c "$(wget -O- https://raw.githubusercontent.com/trojan-gfw/trojan-quickstart/master/trojan-quickstart.sh)"
+mkdir /root/.acme.sh
+curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
+chmod +x /root/.acme.sh/acme.sh
+sudo pkill -f nginx & wait $!
+systemctl stop nginx
+sleep 2
+/root/.acme.sh/acme.sh  --upgrade  --auto-upgrade
+/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256 --server letsencrypt >> /etc/rare/tls/$domain.log
+~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/rare/xray/xray.crt --keypath /etc/rare/xray/xray.key --ecc
+cat /etc/rare/tls/$domain.log
+systemctl daemon-reload
+systemctl restart nginx
+service squid start
+uuid=$(cat /proc/sys/kernel/random/uuid)
