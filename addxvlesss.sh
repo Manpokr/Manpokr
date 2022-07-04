@@ -14,11 +14,12 @@ echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 xray-menu
 fi
+
 read -p "BUG TELCO : " BUG
 read -p "Duration (day) : " duration
 uuid=$(cat /proc/sys/kernel/random/uuid)
-exp=$(date -d +${duration}days +%Y-%m-%d)
-expired=$(date -d "${exp}" +"%d %b %Y")
+hariini=$(date -d +${duration}days +%Y-%m-%d)
+exp=$(date -d "${exp}" +"%d %b %Y")
 domain=$(cat /etc/rare/xray/domain)
 xtls="$(cat ~/log-install.txt | grep -w "XRAY VLESS XTLS SPLICE" | cut -d: -f2|sed 's/ //g')"
 email=${user}@${domain}
@@ -63,33 +64,29 @@ EOF
 # // User Info
 echo ${base64Result} >"/etc/rare/config-url/${uuid}"
 systemctl restart xray.service
-echo -e "\033[32m[Info]\033[0m xray Start Successfully !"
 sleep 2
 clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\E[0;100;33m    • XRAY USER INFORMATION •      \E[0m"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"  
-echo -e ""   
-echo -e " Username      : $user"
-echo -e " Expired date  : $expired"
-echo -e " Jumlah Hari   : $duration Hari"
-echo -e " PORT          : $xtls"
-echo -e " UUID/PASSWORD : $uuid"
-echo -e ""
-echo -e " Ip Vps        : $MYIP"
-echo -e " Domain        : $domain"
-echo -e " Bug Domain    : $BUG"    	
-echo -e ""
-echo -e " Link VLESS SPLICE: vless://$uuid@$BUG.$domain:$xtls?flow=xtls-rprx-splice&encryption=none&security=xtls&sni=$BUG&type=tcp&headerType=none&host=$BUG#$user@IanVPN"
-echo -e ""
-echo -e " Link VLESS DIRECT: vless://$uuid@$BUG.$domain:$xtls?flow=xtls-rprx-direct&encryption=none&security=xtls&sni=$BUG&type=tcp&headerType=none&host=$BUG#$user@IanVPN"
-echo -e ""
-echo -e " Link VLESS WS: vless://$uuid@$BUG.$domain:$xtls?encryption=none&security=xtls&sni=$BUG&type=ws&host=$BUG&path=/xrayws#$user@IanVPN"
-echo -e ""
-echo -e " Link TROJAN: trojan://$uuid@$BUG.$domain:$xtls?sni=$BUG#$user@IanVPN"
-echo -e ""
-echo -e " Link VMESS TLS: ${vmesslink1}"
-echo -e ""
 
-echo -e ""
-echo ""
+echo -e "================================="
+echo -e "        XRAY VLESS XTLS         "
+echo -e "================================="
+echo -e "Remarks        : ${user}"
+echo -e "IP/Host        : ${IP}"
+echo -e "Domain         : ${domain}"
+echo -e "Subdomain      : ${dom}"
+echo -e "Sni/Bug        : ${sni}"
+echo -e "port TCP-XTLS  : $xtls"
+echo -e "id             : ${uuid}"
+echo -e "================================="
+echo -e "Direct         : ${vd}"
+echo -e "================================="
+echo -e "Direct UDP     : ${vu}"
+echo -e "================================="
+echo -e "Splice         : ${vs}"
+echo -e "================================="
+echo -e "Splice         : ${vsu}"
+echo -e "================================="
+echo -e "Created        : $hariini"
+echo -e "Expired On     : $exp"
+echo -e "================================="
+echo -e "ScriptMod By Manternet"
