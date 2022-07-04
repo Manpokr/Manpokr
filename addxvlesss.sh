@@ -9,11 +9,21 @@ if grep -qw "$user" /etc/rare/xray/clients.txt; then
 echo -e ""
 echo -e "User \e[31m$user\e[0m already exist"
 echo -e ""
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 xray-menu
 fi
+
+# // Add User
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
+		read -rp "User: " -e user
+		CLIENT_EXISTS=$(grep -w $user /etc/xray/xrayxtls.json | wc -l)
+
+		if [[ ${CLIENT_EXISTS} == '1' ]]; then
+			echo ""
+			echo "A client with the specified name was already created, please choose another name."
+			exit 1
+		fi
+	done
 
 read -p "BUG TELCO : " BUG
 read -p "Duration (day) : " duration
