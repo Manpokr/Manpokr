@@ -8,15 +8,11 @@ read -p "Username  : " user
 if grep -qw "$user" /etc/rare/xray/clients.txt; then
 echo -e ""
 echo -e "User \e[31m$user\e[0m already exist"
-echo -e ""
-read -n 1 -s -r -p "Press any key to back on menu"
-xray-menu
-fi
 
 # // Add User
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 		read -rp "User: " -e user
-		CLIENT_EXISTS=$(grep -w $user /etc/xray/xrayxtls.json | wc -l)
+		CLIENT_EXISTS=$(grep -w $user /etc/rare/xray/clients.txt | wc -l)
 
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
 			echo ""
