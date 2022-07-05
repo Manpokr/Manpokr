@@ -336,11 +336,11 @@ cd /usr/bin
 wget -O xray-menu "https://raw.githubusercontent.com/Manpokr/Manpokr/main/xray/xray-menu.sh"
 wget -O xp "https://raw.githubusercontent.com/Manpokr/Manpokr/main/xray/xray-xp.sh"
 wget -O addtrgrpc "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addtrojangrpc.sh"
-wget -O addtrxtls "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addtrxtls.sh
-wget -O addxtls "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxtls.sh
-wget -O addxtrojan "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxtrojan.sh
-wget -O addxvless "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxvless.sh
-wget -O addxv2ray "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxv2ray.sh
+wget -O addtrxtls "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addtrxtls.sh"
+wget -O addxtls "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxtls.sh"
+wget -O addxtrojan "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxtrojan.sh"
+wget -O addxvless "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxvless.sh"
+wget -O addxv2ray "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxv2ray.sh"
 wget -O menu-xray "https://raw.githubusercontent.com/Manpokr/Manpokr/main/menu/menu-xray.sh"
 wget -O menu "https://raw.githubusercontent.com/Manpokr/Manpokr/main/menu/menu"
 wget -O certv2ray "https://raw.githubusercontent.com/Manpokr/Manpokr/main/addon/certv2ray.sh"
