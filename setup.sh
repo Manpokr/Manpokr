@@ -21,24 +21,6 @@ echo "Script Already Installed"
 exit 0
 fi
 clear
-echo ""
-echo ""
-echo -e "\e[33m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e " \E[0;100;33m        • AutoScript by IANVPN •            \E[0m"
-echo -e "\e[33m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\e[92m             ___   _   _  ___   _____ _  _    "
-echo -e "\e[92m            |_ _| /_\ | \| \ \ / / _ \ \| |   "
-echo -e "\e[92m             | | / _ \|    |\ V /|  _/    |   "
-echo -e "\e[92m            |___/_/ \_\_|\_| \_/ |_| |_|\_|   "
-echo -e "\e[33m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo "" 
-echo -e "$green               Telegram:$NC $red@IanVPN               $NC"
-echo -e "$green        Script Version:$NC $red VERSI LONAKK GEMOK          $NC"
-echo ''
-echo -e "$green              Proses akan mula dalam 5 Saat!            $NC"
-echo -e "\e[33m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 5
-clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "$green Sila Masukkan Sub Domain (sub.yourdomain.com) $NC"
 echo -e "$green Jika tiada Sila [ Ctrl+C ] • To-Exit $NC"
@@ -61,70 +43,41 @@ touch /etc/rare/v2ray/clients.txt
 echo "IP=$host" >> /var/lib/premium-script/ipvps.conf
 echo "$host" >> /etc/rare/xray/domain
 echo "$host" >> /root/domain
-echo "LONAK" >> /home/version
-echo "@IanVPN" >> /home/contact
+echo "2.0 Beta" >> /home/version
+echo "@Manternet" >> /home/contact
 clear
 secs_to_human() {
     echo "Installation time : $(( ${1} / 3600 )) hours $(( (${1} / 60) % 60 )) minute's $(( ${1} % 60 )) seconds"
 }
 start=$(date +%s)
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green     Sila Tunggu sebentar             $NC"
-echo -e "$gree Process Update & Upgrade Sedang Dijalankan  $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
+
+# // Update
 apt-get update && apt-get upgrade -y && update-grub -y
 clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green  Process Update&Upgrade Selesai        $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
-clear
-#install ssh ovpn
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green      Install SSH OVPN               $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
+
+# // Install Ssh
 wget https://raw.githubusercontent.com/Manpokr/lite/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green Installing AutoScript IANVPN        $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
-##install v2ray
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green  ISSUE CERT & Install TROJAN GFW       $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
+
+# // Install Xray
 wget https://raw.githubusercontent.com/Manpokr/lite/main/ins-vt.sh && chmod +x ins-vt.sh && screen -S v2ray ./ins-vt.sh
-#Instal Xray
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green          Install XRAY              $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
+
+# // Instal Xray
 wget https://raw.githubusercontent.com/Manpokr/lite/main/xray-go.sh && chmod +x xray-go.sh && screen -S xray-go ./xray-go.sh
-#Instal Xray
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green           Install V2RAY              $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
+
+# // Instal Xray
 wget https://raw.githubusercontent.com/Manpokr/lite/main/v2ray-go.sh && chmod +x v2ray-go.sh && screen -S v2ray-go ./v2ray-go.sh
-#set backup
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green            SET BACKUP               $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
+
+# // Backup
 wget https://raw.githubusercontent.com/Manpokr/lite/main/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 
 rm -f /root/ins-vt.sh
 rm -f /root/set-br.sh
 rm -f /root/xray-go.sh
-rm -f /root/v2ray-go.sh
-
 
 cat <<EOF> /etc/systemd/system/autosett.service
 [Unit]
 Description=autosetting
-Documentation=https://ianvpn.xyz
+Documentation=https://manternet.xyz
 
 [Service]
 Type=oneshot
@@ -136,24 +89,13 @@ WantedBy=multi-user.target
 EOF
 systemctl daemon-reload
 systemctl enable autosett
-wget -O /etc/set.sh "https://raw.githubusercontent.com/Manpokr/lite/main/set.sh"
+wget -O /etc/set.sh "https://raw.githubusercontent.com/Manpokr/Manpokr/main/set.sh"
 chmod +x /etc/set.sh
 history -c
 clear
 echo " "
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green  Installation has been completed!!      $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
-echo " "
-echo -e "\e[33m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e " \E[0;100;33m        • AutoScript by IANVPN •            \E[0m"
-echo -e "\e[33m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\e[92m             ___   _   _  ___   _____ _  _    "
-echo -e "\e[92m            |_ _| /_\ | \| \ \ / / _ \ \| |   "
-echo -e "\e[92m             | | / _ \|    |\ V /|  _/    |   "
-echo -e "\e[92m            |___/_/ \_\_|\_| \_/ |_| |_|\_|   "
-echo ""
+
+# // Info
 echo "   >>> Service & Port"  | tee -a log-install.txt
 echo "   - Badvpn                  : 7300"  | tee -a log-install.txt
 echo "   - Nginx                   : 81, 82"  | tee -a log-install.txt
@@ -187,7 +129,7 @@ echo "   - Change port                     " | tee -a log-install.txt
 echo "   - Restore Data                    " | tee -a log-install.txt
 echo "   - Full Orders For Various Services" | tee -a log-install.txt
 echo ""
-echo -e "\e[33m━━━━━━━━━[\e[0m \e[32mSayang kedak Babi\e[0m \e[33m]━━━━━━━━━━━\e[0m"
+echo -e "\e[33m━━━━━━━━━[\e[0m \e[32mSayang Mod\e[0m \e[33m]━━━━━━━━━━━\e[0m"
 echo ""
 secs_to_human "$(($(date +%s) - ${start}))" | tee -a log-install.txt
 echo -e ""
@@ -195,7 +137,7 @@ sleep 3
 echo -e ""
 rm -f /root/setup.sh
 rm -f /root/.bash_history
-echo -ne "[ ${yell}WARNING${NC} ] Lepas install , tapi button y dan enter okay syg comel pendek? (y/n)? "
+echo -ne "[ ${yell}WARNING${NC} ] Lepas install , tekan button y dan enter okay syg comel pendek? (y/n)? "
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
