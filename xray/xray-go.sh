@@ -5,22 +5,52 @@ Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_p
 Info="${Green_font_prefix}[information]${Font_color_suffix}"
 MYIP=$(wget -qO- ipinfo.io/ip);
 clear
-echo -e "${Info} XRAY CORE VPS AutoScript by IANVPN"
-# Detect public IPv4 address and pre-fill for the user
-# Domain 
+# // Bahan²
+apt install iptables iptables-persistent -y
+apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
+apt install socat cron bash-completion ntpdate -y
+ntpdate pool.ntp.org
+apt -y install chrony
+timedatectl set-ntp true
+systemctl enable chronyd && systemctl restart chronyd
+systemctl enable chrony && systemctl restart chrony
+timedatectl set-timezone Asia/Kuala_Lumpur
+chronyc sourcestats -v
+chronyc tracking -v
+date
+
+# // Detect public IPv4 address and pre-fill for the user
+# // Domain 
 apt install unzip
 domain=$(cat /etc/rare/xray/domain)
-# Uuid Service
+
+# // Uuid Service
 uuid=$(cat /proc/sys/kernel/random/uuid)
-echo -e "\e[0;32m XRAY CORE VPS AutoScript by IANVPN\e[0m"
-echo -e "\e[0;32m TELEGRAM @IanVPN\e[0m"
-sleep 5
-# INSTALL XRAY
+
+# / / Ambil Xray Core Version Terbaru
+#latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
+
+# / / Installation Xray Core
+#xraycore_link="https://github.com/XTLS/Xray-core/releases/download/v$latest_version/xray-linux-64.zip"
+
+# / / Make Main Directory
+#mkdir -p /usr/bin/xray
+#mkdir -p /etc/xray
+
+# / / Unzip Xray Linux 64
+#cd `mktemp -d`
+#curl -sL "$xraycore_link" -o xray.zip
+#unzip -q xray.zip && rm -rf xray.zip
+#mv xray /usr/local/bin/xray
+#chmod +x /usr/local/bin/xray
+
+# // INSTALL XRAY
 wget -c -P /etc/rare/xray/ "https://github.com/XTLS/Xray-core/releases/download/v1.4.5/Xray-linux-64.zip"
 unzip -o /etc/rare/xray/Xray-linux-64.zip -d /etc/rare/xray 
 rm -rf /etc/rare/xray/Xray-linux-64.zip
 chmod 655 /etc/rare/xray/xray
-# XRay boot service
+
+# // XRay boot service
 cat <<EOF >/etc/systemd/system/xray.service
 [Unit]
 Description=Xray - A unified platform for anti-censorship
@@ -41,6 +71,8 @@ RestartPreventExitStatus=23
 [Install]
 WantedBy=multi-user.target
 EOF
+
+# // Add Json
 systemctl daemon-reload
 systemctl enable xray.service
 rm -rf /etc/rare/xray/conf/*
@@ -268,14 +300,16 @@ cat <<EOF >/etc/rare/xray/conf/06_VLESS_gRPC_inbounds.json
 ]
 }
 EOF
-# xray
+
+# // IpTables
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 31301 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 31299 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 31296 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 31304 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 31297 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
-# xray
+
+# // IpTables
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 31301 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 31299 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 31296 -j ACCEPT
@@ -287,17 +321,50 @@ netfilter-persistent save
 netfilter-persistent reload
 systemctl daemon-reload
 
-# Starting
+# // Restart Xray
 systemctl daemon-reload
 systemctl restart xray
 systemctl enable xray
 systemctl restart xray.service
 systemctl enable xray.service
-
-cd /usr/bin
-wget -O xray-menu "https://raw.githubusercontent.com/Manpokr/lite/main/xray-menu.sh"
-chmod +x xray-menu
-cd
-systemctl daemon-reload
 systemctl restart nginx
 systemctl restart xray
+
+
+# // Download File
+cd /usr/bin
+wget -O xray-menu "https://raw.githubusercontent.com/Manpokr/Manpokr/main/xray/xray-menu.sh"
+wget -O xp "https://raw.githubusercontent.com/Manpokr/Manpokr/main/xray/xray-xp.sh"
+wget -O addtrgrpc "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addtrojangrpc.sh"
+wget -O addtrxtls "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addtrxtls.sh
+wget -O addxtls "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxtls.sh
+wget -O addxtrojan "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxtrojan.sh
+wget -O addxvless "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxvless.sh
+wget -O addxv2ray "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxv2ray.sh
+
+# // Del
+wget -O deltrxtls "https://raw.githubusercontent.com/Manpokr/Manpokr/main/del/deltrxtls.sh"
+wget -O deltrgrpc "https://raw.githubusercontent.com/Manpokr/Manpokr/main/del/deltrgrpc.sh"
+wget -O delxtls "https://raw.githubusercontent.com/Manpokr/Manpokr/main/del/delxtls.sh"
+wget -O delxtrojan "https://raw.githubusercontent.com/Manpokr/Manpokr/main/del/delxtrojan.sh"
+wget -O delxvless "https://raw.githubusercontent.com/Manpokr/Manpokr/main/del/delxvless.sh"
+wget -O delxv2ray "https://raw.githubusercontent.com/Manpokr/Manpokr/main/del/delxv2ray.sh"
+
+chmod +x xray-menu
+chmod +x xp
+chmod +x addtrgrpc
+chmod +x addtrxtls
+chmod +x addxtls
+chmod +x addxtrojan
+chmod +x addxvless
+chmod +x addxv2ray
+chmod +x deltrxtls
+chmod +x deltrgrpc
+chmod +x delxtls
+chmod +x delxtrojan
+chmod +x delxvless
+chmod +x delxv2ray
+cd
+
+echo -e "done"
+clear
