@@ -11,33 +11,10 @@ bd='\e[1m'
 NC='\e[0m'
 
 #getting
-MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-IZIN=$(curl -sS https://raw.githubusercontent.com/manternet/ipvps/main/ip | awk '{print $4}' | grep $MYIP )
-if [[ $MYIP = $IZIN ]]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin!!"
-rm -f menu_xray
-exit 0
-fi    
-clear
+
 
 # RUN
-ssr_folder="/usr/local/xray"
-status=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 
-if [[ -e ${ssr_folder} ]]; then
-if [[ $status == "running" ]]; then
-        Current_status=" ${GREEN}XRAY INSTALLED${NC} & ${GREEN}RUNNING${NC}"
-else
-        Current_status=" ${GREEN}XRAY INSTALLED${NC} BUT ${RED}NOT RUNNING${NC}"
-fi
-cd "${ssr_folder}"
-else
-        Current_status=" ${RED}XRAY NOT INSTALL ${NC}"
-fi
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "\E[0;100;31m               • MENU XRAY •                \E[0m"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ${NC}"
