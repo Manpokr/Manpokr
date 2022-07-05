@@ -343,6 +343,7 @@ wget -O addxvless "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/ad
 wget -O addxv2ray "https://raw.githubusercontent.com/Manpokr/Manpokr/main/add/addxv2ray.sh
 wget -O menu-xray "https://raw.githubusercontent.com/Manpokr/Manpokr/main/menu/menu-xray.sh"
 wget -O menu "https://raw.githubusercontent.com/Manpokr/Manpokr/main/menu/menu"
+wget -O certv2ray "https://raw.githubusercontent.com/Manpokr/Manpokr/main/addon/certv2ray.sh"
 
 # // Del
 wget -O deltrxtls "https://raw.githubusercontent.com/Manpokr/Manpokr/main/del/deltrxtls.sh"
@@ -368,6 +369,8 @@ chmod +x delxvless
 chmod +x delxv2ray
 chmod +x menu-xray
 chmod +x menu
+chmod +x certv2ray
+
 cd
 
 echo -e "done"
