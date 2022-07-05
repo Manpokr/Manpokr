@@ -59,7 +59,7 @@ clear
 https://raw.githubusercontent.com/Manpokr/Manpokr/main/addon/cf.sh && chmod +x cf.sh && ./cf.sh
 
 # // Install Ssh
-wget https://raw.githubusercontent.com/Manpokr/lite/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
+wget https://raw.githubusercontent.com/Manpokr/Manpokr/main/addon/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
 
 # // Install Xray
 wget https://raw.githubusercontent.com/Manpokr/Manpokr/main/xray/xray-go.sh && chmod +x xray-go.sh && screen -S xray-go ./xray-go.sh
