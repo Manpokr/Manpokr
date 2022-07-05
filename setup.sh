@@ -55,20 +55,20 @@ start=$(date +%s)
 apt-get update && apt-get upgrade -y && update-grub -y
 clear
 
+# // Domain
+https://raw.githubusercontent.com/Manpokr/Manpokr/main/addon/cf.sh && chmod +x cf.sh && ./cf.sh
+
 # // Install Ssh
 wget https://raw.githubusercontent.com/Manpokr/lite/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
 
 # // Install Xray
-wget https://raw.githubusercontent.com/Manpokr/lite/main/ins-vt.sh && chmod +x ins-vt.sh && screen -S v2ray ./ins-vt.sh
-
-# // Instal Xray
-wget https://raw.githubusercontent.com/Manpokr/lite/main/xray-go.sh && chmod +x xray-go.sh && screen -S xray-go ./xray-go.sh
-
-# // Instal Xray
-wget https://raw.githubusercontent.com/Manpokr/lite/main/v2ray-go.sh && chmod +x v2ray-go.sh && screen -S v2ray-go ./v2ray-go.sh
+wget https://raw.githubusercontent.com/Manpokr/Manpokr/main/xray/xray-go.sh && chmod +x xray-go.sh && screen -S xray-go ./xray-go.sh
 
 # // Backup
 wget https://raw.githubusercontent.com/Manpokr/lite/main/set-br.sh && chmod +x set-br.sh && ./set-br.sh
+
+# // Cert
+wget https://raw.githubusercontent.com/Manpokr/Manpokr/main/addon/cert && chmod +x cert && ./cert
 
 rm -f /root/ins-vt.sh
 rm -f /root/set-br.sh
