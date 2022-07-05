@@ -21,7 +21,7 @@ commonname=www.ianvpn.xyz
 email=admin@IanVPN.xyz
 
 # simple password minimal
-wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/Manpokr/lite/main/password"
+wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/Manpokr/Manpokr/main/addon/password"
 chmod +x /etc/pam.d/common-password
 
 # go to root
@@ -73,7 +73,7 @@ apt-get remove --purge exim4 -y
 apt -y install wget curl
 
 # set time GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+ln -fs /usr/share/zoneinfo/Asia/Kuala_Lumpur /etc/localtime
 
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
@@ -95,7 +95,7 @@ menu
 END
 chmod 644 /root/.profile
 
-# install NGINX webserver
+# // install NGINX webserver
 sudo apt install gnupg2 ca-certificates lsb-release -y 
 echo "deb http://nginx.org/packages/mainline/debian $(lsb_release -cs) nginx" | sudo tee /etc/apt/sources.list.d/nginx.list 
 echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx 
@@ -166,6 +166,7 @@ server {
 	}
 }
 EOF
+
 mkdir /etc/systemd/system/nginx.service.d
 printf "[Service]\nExecStartPost=/bin/sleep 0.1\n" > /etc/systemd/system/nginx.service.d/override.conf
 rm /etc/nginx/conf.d/default.conf
@@ -176,14 +177,6 @@ rm -rf /usr/share/nginx/html
 wget -q -P /usr/share/nginx https://raw.githubusercontent.com/racunzx/hijk.art/main/html.zip 
 unzip -o /usr/share/nginx/html.zip -d /usr/share/nginx/html 
 rm -f /usr/share/nginx/html.zip*
-
-# install badvpn
-cd
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Iansoftware/Script-IANVPN/main/badvpn-udpgw64"
-chmod +x /usr/bin/badvpn-udpgw
-sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500' /etc/rc.local
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
-
 
 # setting vnstat
 apt -y install vnstat
@@ -203,13 +196,6 @@ rm -f /root/vnstat-2.6.tar.gz
 rm -rf /root/vnstat-2.6
 
 
-# make a certificate
-openssl genrsa -out key.pem 2048
-openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
--subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
-cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
-
-
 # install fail2ban
 apt -y install fail2ban
 
@@ -224,7 +210,7 @@ clear
 echo; echo 'Installing DOS-Deflate 0.6'; echo
 echo; echo -n 'Downloading source files...'
 apt install -y dnsutils tcpdump dsniff grepcidr
-wget -qO ddos.zip "https://raw.githubusercontent.com/Manpokr/lite/main/ddos-deflate.zip"
+wget -qO ddos.zip "https://raw.githubusercontent.com/Manpokr/Manpokr/main/xray/ddos-deflate.zip"
 unzip ddos.zip
 cd ddos-deflate
 chmod +x install.sh
@@ -255,97 +241,7 @@ netfilter-persistent reload
 
 # download script
 cd /usr/bin
-# menu
-wget -O menu "https://raw.githubusercontent.com/Manpokr/lite/main/menu.sh"
-# menu ssh-ovpn
-wget -O usernew "https://raw.githubusercontent.com/Manpokr/lite/main/usernew.sh"
-wget -O trial "https://raw.githubusercontent.com/Manpokr/lite/main/trial.sh"
-wget -O renew "https://raw.githubusercontent.com/Manpokr/lite/main/renew.sh"
-wget -O hapus "https://raw.githubusercontent.com/Manpokr/lite/main/hapus.sh"
-wget -O cek "https://raw.githubusercontent.com/Manpokr/lite/main/cek.sh"
-wget -O member "https://raw.githubusercontent.com/Manpokr/lite/main/member.sh"
-wget -O delete "https://raw.githubusercontent.com/Manpokr/lite/main/delete.sh"
-wget -O autokill "https://raw.githubusercontent.com/Manpokr/lite/main/autokill.sh"
-wget -O ceklim "https://raw.githubusercontent.com/Manpokr/lite/main/ceklim.sh"
-wget -O tendang "https://raw.githubusercontent.com/Manpokr/lite/main/tendang.sh"
-# menu wg
-cd /usr/bin
-# menu trojan
-wget -O m-trojan "https://raw.githubusercontent.com/Manpokr/lite/main/m-trojan.sh"
-# menu system
-wget -O m-system "https://raw.githubusercontent.com/Manpokr/lite/main/m-system.sh"
-wget -O m-domain "https://raw.githubusercontent.com/Manpokr/lite/main/m-domain.sh"
-wget -O add-host "https://raw.githubusercontent.com/Manpokr/lite/main/add-host.sh"
-wget -O cff "https://raw.githubusercontent.com/Manpokr/lite/main/cff.sh"
-wget -O certv2ray "https://raw.githubusercontent.com/Manpokr/lite/main/certv2ray.sh"
-wget -O port-change "https://raw.githubusercontent.com/Manpokr/lite/main/port-change.sh"
-   # menu system
-wget -O m-webmin "https://raw.githubusercontent.com/Manpokr/lite/main/m-webmin.sh"
-wget -O ram "https://raw.githubusercontent.com/Manpokr/lite/main/ram.sh"
-wget -O speedtest "https://raw.githubusercontent.com/Manpokr/lite/main/speedtest_cli.py"
-wget -O info-menu "https://raw.githubusercontent.com/Manpokr/lite/main/info-menu.sh"
-wget -O vpsinfo "https://raw.githubusercontent.com/Manpokr/lite/main/vpsinfo.sh"
-wget -O status "https://raw.githubusercontent.com/Manpokr/lite/main/status.sh"
-wget -O about "https://raw.githubusercontent.com/Manpokr/lite/main/about.sh"
-wget -O bbr "https://raw.githubusercontent.com/Manpokr/lite/main/bbr.sh"
-wget -O auto-reboot "https://raw.githubusercontent.com/Manpokr/lite/main/auto-reboot.sh"
-wget -O clear-log "https://raw.githubusercontent.com/Manpokr/lite/main/clear-log.sh"
-wget -O clearcache "https://raw.githubusercontent.com/Manpokr/lite/main/clearcache.sh"
-wget -O restart "https://raw.githubusercontent.com/Manpokr/lite/main/restart.sh"
-wget -O bw "https://raw.githubusercontent.com/Manpokr/lite/main/bw.sh"
-wget -O resett "https://raw.githubusercontent.com/Manpokr/lite/main/resett.sh"
-wget -O kernel-updt "https://raw.githubusercontent.com/Manpokr/lite/main/kernel-updt.sh"
-#xpired
-wget -O xp "https://raw.githubusercontent.com/Manpokr/lite/main/xp.sh"
-wget -O xray-xp "https://raw.githubusercontent.com/Manpokr/lite/main/xray-xp.sh"
-wget -O v2ray-xp "https://raw.githubusercontent.com/Manpokr/lite/main/v2ray-xp.sh"
 
-chmod +x menu
-chmod +x m-sshovpn
-chmod +x usernew
-chmod +x trial
-chmod +x renew
-chmod +x hapus
-chmod +x cek
-chmod +x member
-chmod +x delete
-chmod +x autokill
-chmod +x ceklim
-chmod +x tendang
-chmod +x m-wg
-chmod +x m-ss
-chmod +x m-trojan
-chmod +x m-system
-chmod +x m-domain
-chmod +x add-host
-chmod +x cff
-chmod +x cfd
-chmod +x cfh
-chmod +x certv2ray
-chmod +x port-change
-chmod +x port-ssl
-chmod +x port-ovpn
-chmod +x port-wg
-chmod +x port-tr
-chmod +x port-squid
-chmod +x m-webmin
-chmod +x ram
-chmod +x speedtest
-chmod +x info-menu
-chmod +x vpsinfo
-chmod +x status
-chmod +x about
-chmod +x bbr
-chmod +x auto-reboot
-chmod +x clear-log
-chmod +x clearcache
-chmod +x restart
-chmod +x bw
-chmod +x resett
-chmod +x xp
-chmod +x xray-xp
-chmod +x v2ray-xp
-chmod +x kernel-updt
 
 echo "0 0 * * * root /sbin/hwclock -w   # synchronize hardware & system clock each day at 00:00 am" >> /etc/crontab
 echo "0 */2 * * * root /usr/bin/clear-log # clear log every  two hours" >> /etc/crontab
@@ -353,7 +249,6 @@ echo "0 */12 * * * root /usr/bin/clearcache  #clear cache every 12hours daily" >
 echo "55 23 * * * root /usr/bin/delete # delete expired user" >> /etc/crontab
 echo "50 23 * * * root /usr/bin/xp # delete expired user" >> /etc/crontab
 echo "35 23 * * * root /usr/bin/xray-xp # delete expired user" >> /etc/crontab
-echo "15 23 * * * root /usr/bin/v2ray-xp # delete expired user" >> /etc/crontab
 # remove unnecessary files
 cd
 apt autoclean -y
@@ -367,16 +262,10 @@ apt autoremove -y
 cd
 chown -R www-data:www-data /usr/share/nginx/html
 /etc/init.d/nginx restart
-/etc/init.d/openvpn restart
+
 /etc/init.d/cron restart
-/etc/init.d/ssh restart
-/etc/init.d/dropbear restart
 /etc/init.d/fail2ban restart
-/etc/init.d/stunnel4 restart
 /etc/init.d/vnstat restart
-/etc/init.d/squid restart
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
-history -c
 echo "unset HISTFILE" >> /etc/profile
 
 cd
